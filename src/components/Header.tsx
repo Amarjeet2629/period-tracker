@@ -2,7 +2,7 @@ export const Header = ({ cycleDay }: { cycleDay: number }) => {
     return (
         <header className="bg-black/60 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-md mx-auto px-4 py-4">
-                <div className="flex items-center justify-between">
+                <div style={{ padding: '6px' }} className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                         <div style={{ marginRight: '4px' }} className="w-9 h-9 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
                             <span className="text-white text-lg">🌸</span>
