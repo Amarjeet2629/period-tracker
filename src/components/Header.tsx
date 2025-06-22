@@ -1,4 +1,4 @@
-export const Header = ({ cycleDay }: { cycleDay: number }) => {
+export const Header = () => {
     return (
         <header className="bg-black/60 backdrop-blur-xl sticky top-0 z-50">
             <div className="max-w-md mx-auto px-4 py-4">
@@ -9,7 +9,6 @@ export const Header = ({ cycleDay }: { cycleDay: number }) => {
                         </div>
                         <div className="flex flex-col">
                             <p className="text-md font-semibold text-white">Period Tracker</p>
-                            <span className="text-sm text-white/60 -mt-1">Cycle Day {cycleDay}</span>
                         </div>
                     </div>
                     <button className="w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors">

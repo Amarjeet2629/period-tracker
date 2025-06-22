@@ -1,4 +1,16 @@
-export const CycleProgress = ({ cycleDay, cycleLength, }: { cycleDay: number, cycleLength: number }) => {
+import { useMemo } from "react";
+
+import { State } from "@/constants/types";
+
+
+export const CycleProgress = ({ state }: { state: State }) => {
+  const { cycleStartDate, cycleLength, currentDate } = state;
+
+  const cycleDay = useMemo(() => {
+    if (!cycleStartDate || !currentDate) return 0;
+    return Math.floor((currentDate - cycleStartDate) / (1000 * 60 * 60 * 24)) + 1;
+  }, [cycleStartDate, currentDate]);
+
     const cyclePhases = [
         { name: 'Menstrual', days: '1-5', color: 'bg-red-500/20 border-red-500/30' },
         { name: 'Follicular', days: '6-14', color: 'bg-blue-500/20 border-blue-500/30' },
@@ -7,9 +19,9 @@ export const CycleProgress = ({ cycleDay, cycleLength, }: { cycleDay: number, cy
     ];
 
     return (
-        <div 
-            className="bg-black/40 backdrop-blur-xl shadow-2xl" 
-            style={{ 
+        <div
+            className="bg-black/40 backdrop-blur-xl shadow-2xl"
+            style={{
                 padding: '20px',
                 paddingBottom: '0px'
             }}
@@ -53,7 +65,7 @@ export const CycleProgress = ({ cycleDay, cycleLength, }: { cycleDay: number, cy
             </div>
 
             {/* Phase Indicator */}
-            <div style ={{marginTop: '8px'}} className="grid grid-cols-4 gap-3">
+            <div style={{ marginTop: '8px' }} className="grid grid-cols-4 gap-3">
                 {cyclePhases.map((phase) => (
                     <div
                         key={phase.name}
