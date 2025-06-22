@@ -4,12 +4,15 @@ import { State } from "@/constants/types";
 
 
 export const CycleProgress = ({ state }: { state: State }) => {
-  const { cycleStartDate, cycleLength, currentDate } = state;
+  const { cycleStartDate, cycleLength } = state;
+  
 
   const cycleDay = useMemo(() => {
-    if (!cycleStartDate || !currentDate) return 0;
-    return Math.floor((currentDate - cycleStartDate) / (1000 * 60 * 60 * 24)) + 1;
-  }, [cycleStartDate, currentDate]);
+    if (!cycleStartDate) return 0;
+    // Always use the current time for the calculation to ensure it's up-to-date.
+    const now = Date.now();
+    return Math.floor((now - cycleStartDate) / (1000 * 60 * 60 * 24));
+  }, [cycleStartDate]);
 
     const cyclePhases = [
         { name: 'Menstrual', days: '1-5', color: 'bg-red-500/20 border-red-500/30' },

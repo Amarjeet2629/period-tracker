@@ -17,13 +17,6 @@ export const appReducer = (state: State, action: AppAction): State => {
             }
             return state;
 
-        case ACTION_TYPES.CURRENT_DATE:
-            // Ensure payload is a number
-            if (typeof action.payload === 'number') {
-                return { ...state, currentDate: action.payload };
-            }
-            return state;
-
         default:
             return state;
     }

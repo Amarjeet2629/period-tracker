@@ -13,7 +13,6 @@ export const Content = () => {
     const initialState = useMemo((): State => ({
         cycleStartDate: null,
         cycleLength: 28,
-        currentDate: Date.now()
     }), [])
 
     const [state, dispatch] = useReducer(appReducer, initialState)
