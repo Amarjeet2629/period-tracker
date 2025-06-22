@@ -8,9 +8,10 @@ export const CycleProgress = ({ cycleDay, cycleLength, }: { cycleDay: number, cy
 
     return (
         <div 
-            className="bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl" 
+            className="bg-black/40 backdrop-blur-xl shadow-2xl" 
             style={{ 
-                padding: '20px'
+                padding: '20px',
+                paddingBottom: '0px'
             }}
         >
             <div className="flex items-center justify-between mb-6">
@@ -52,7 +53,7 @@ export const CycleProgress = ({ cycleDay, cycleLength, }: { cycleDay: number, cy
             </div>
 
             {/* Phase Indicator */}
-            <div className="grid grid-cols-4 gap-3">
+            <div style ={{marginTop: '8px'}} className="grid grid-cols-4 gap-3">
                 {cyclePhases.map((phase) => (
                     <div
                         key={phase.name}

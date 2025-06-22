@@ -7,17 +7,18 @@ export const HealthMetric = () => {
 
     return (
         <div 
-            className="bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl" 
+            className="bg-black/40 backdrop-blur-xl shadow-2xl" 
             style={{ 
-                padding: '20px'
+                padding: '20px',
+                paddingBottom: '0px'
             }}
         >
             <h2 className="text-lg font-semibold text-white mb-6">Today&apos;s Health</h2>
             <div className="space-y-4">
-                {healthMetrics.map((metric) => (
-                    <div key={metric.name} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
+                {healthMetrics.map((metric, index) => (
+                    <div style={{ paddingLeft: '6px', paddingRight: '6px', paddingTop: '2px', paddingBottom: '2px', marginBottom: index === healthMetrics.length - 1 ? '0px' : '6px' }} key={metric.name} className="flex items-center justify-between bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
                         <div className="flex items-center space-x-4">
-                            <div className={`w-10 h-10 ${metric.color} rounded-full flex items-center justify-center shadow-lg`}>
+                            <div style={{ marginRight: '4px' }} className={`w-8 h-8 ${metric.color} rounded-full flex items-center justify-center shadow-lg`}>
                                 <span className="text-white text-lg">{metric.icon}</span>
                             </div>
                             <span className="font-medium text-white">{metric.name}</span>

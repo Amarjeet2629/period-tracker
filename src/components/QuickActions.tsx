@@ -1,9 +1,10 @@
 export const QuickActions = () => {
     return (
         <div 
-            className="bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl" 
+            className="bg-black/40 backdrop-blur-xl shadow-2xl" 
             style={{ 
-                padding: '20px'
+                padding: '20px',
+                paddingBottom: '0px'
             }}
         >
             <h2 className="text-lg font-semibold text-white mb-6">Quick Actions</h2>
