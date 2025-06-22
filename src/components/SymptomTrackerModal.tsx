@@ -37,7 +37,7 @@ export const SymptomTrackerModal: React.FC<SymptomTrackerModalProps> = ({ onClos
         }
     };
 
-    const isSaveDisabled = !symptomName.trim() || icon === '🤔';
+    const isSaveDisabled = !symptomName.trim();
 
     return (
         <>
