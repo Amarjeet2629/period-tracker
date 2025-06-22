@@ -4,8 +4,8 @@
   "description": "Track your menstrual cycle and health",
   "start_url": "/",
   "scope": "/",
-  "theme_color": "#FFFFFF",
-  "background_color": "#FFFFFF",
+  "theme_color": "#0d0d0d",
+  "background_color": "#0d0d0d",
   "icons": [
     {
       "purpose": "maskable",
