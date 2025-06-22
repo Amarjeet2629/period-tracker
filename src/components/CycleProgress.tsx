@@ -1,18 +1,33 @@
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 
 import { State } from "@/constants/types";
 
 
 export const CycleProgress = ({ state }: { state: State }) => {
-  const { cycleStartDate, cycleLength } = state;
-  
+    const { cycleStartDate, cycleLength } = state;
+    
+    const [now, setNow] = useState(Date.now());
 
-  const cycleDay = useMemo(() => {
-    if (!cycleStartDate) return 0;
-    // Always use the current time for the calculation to ensure it's up-to-date.
-    const now = Date.now();
-    return Math.floor((now - cycleStartDate) / (1000 * 60 * 60 * 24));
-  }, [cycleStartDate]);
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'visible') {
+                console.log('visible');
+                setNow(Date.now());
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, []);
+
+    const cycleDay = useMemo(() => {
+        if (!cycleStartDate) return 0;
+        // Always use the current time for the calculation to ensure it's up-to-date.
+        return Math.floor((now - cycleStartDate) / (1000 * 60 * 60 * 24)) + 1;
+    }, [cycleStartDate, now]);
 
     const cyclePhases = [
         { name: 'Menstrual', days: '1-5', color: 'bg-red-500/20 border-red-500/30' },
