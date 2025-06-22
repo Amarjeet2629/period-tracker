@@ -22,7 +22,7 @@ export default function Home() {
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
         className="bg-black/80 backdrop-blur-xl border-t border-white/10 z-50"
       >
-        <div className="max-w-md mx-auto px-4 py-4">
+        <div style={{ paddingTop: '16px', paddingBottom: '12px' }} className="max-w-md mx-auto">
           <div className="flex justify-around">
             <button className="flex flex-col items-center p-2 text-indigo-400">
               <span className="text-xl">🏠</span>

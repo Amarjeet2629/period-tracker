@@ -1,10 +1,6 @@
-export const Symptoms = () => {
-    const symptoms = [
-        { name: 'Cramps', severity: 'mild', icon: '🩸' },
-        { name: 'Fatigue', severity: 'moderate', icon: '😴' },
-        { name: 'Mood Swings', severity: 'mild', icon: '😔' },
-    ];
+import { Symptom } from '@/constants/types';
 
+export const Symptoms = ({ symptoms }: { symptoms: Symptom[] }) => {
     return (
         <div 
             className="bg-black/40 backdrop-blur-xl shadow-2xl" 
@@ -22,8 +18,8 @@ export const Symptoms = () => {
                             <span className="font-medium text-white">{symptom.name}</span>
                         </div>
                         <span style={{ padding: '4px' }} className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            symptom.severity === 'mild' ? 'bg-yellow-900/40 text-yellow-300' :
-                            symptom.severity === 'moderate' ? 'bg-orange-900/40 text-orange-300' :
+                            symptom.severity === 'MILD' ? 'bg-yellow-900/40 text-yellow-300' :
+                            symptom.severity === 'MODERATE' ? 'bg-orange-900/40 text-orange-300' :
                             'bg-red-900/40 text-red-300'
                         }`}>
                             {symptom.severity}
@@ -31,9 +27,6 @@ export const Symptoms = () => {
                     </div>
                 ))}
             </div>
-            <button className="w-full mt-4 p-3 border-2 border-dashed border-white/20 rounded-xl text-white/70 hover:border-indigo-400 hover:text-indigo-300 transition-colors">
-                + Add Symptom
-            </button>
         </div>
     )
 }

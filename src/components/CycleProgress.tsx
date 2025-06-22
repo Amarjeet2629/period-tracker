@@ -5,13 +5,11 @@ import { State } from "@/constants/types";
 
 export const CycleProgress = ({ state }: { state: State }) => {
     const { cycleStartDate, cycleLength } = state;
-    
     const [now, setNow] = useState(Date.now());
 
     useEffect(() => {
         const handleVisibilityChange = () => {
             if (document.visibilityState === 'visible') {
-                console.log('visible');
                 setNow(Date.now());
             }
         };

@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 
 import { Calendar } from './Calendar';
+import { SymptomTrackerModal } from './SymptomTrackerModal';
 
-import { State } from '@/constants/types';
+import { Symptom } from '@/constants/types';
 
-export const QuickActions = ({ state, handleCycleStartDateChange }: { state: State, handleCycleStartDateChange: (date: Date) => void }) => {
+interface QuickActionsProps {
+    handleCycleStartDateChange: (date: Date) => void;
+    handleSaveSymptom: (symptom: Symptom) => void;
+}
+
+export const QuickActions: React.FC<QuickActionsProps> = ({ handleCycleStartDateChange, handleSaveSymptom }) => {
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-    const { cycleStartDate } = state;
-
-    const handleLogPeriod = () => {
-        setIsCalendarOpen(true);
-    };
+    const [isSymptomModalOpen, setIsSymptomModalOpen] = useState(false);
 
     const handleDateSelect = (date: Date) => {
-        handleCycleStartDateChange(date)
+        handleCycleStartDateChange(date);
+        setIsCalendarOpen(false);
     };
 
-    const handleCloseCalendar = () => {
-        setIsCalendarOpen(false);
+    const handleSymptomAddition = (symptom: Symptom) => {
+        handleSaveSymptom(symptom);
     };
 
     return (
@@ -32,12 +35,15 @@ export const QuickActions = ({ state, handleCycleStartDateChange }: { state: Sta
                 <h2 className="text-lg font-semibold text-white mb-6">Quick Actions</h2>
                 <div className="grid grid-cols-2 gap-3">
                     <button
-                        onClick={handleLogPeriod}
+                        onClick={() => setIsCalendarOpen(true)}
                         className="p-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-medium hover:from-indigo-600 hover:to-purple-700 transition-all shadow-md"
                     >
                         Log Period
                     </button>
-                    <button className="p-4 bg-gradient-to-r from-blue-500 to-cyan-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-cyan-700 transition-all shadow-md">
+                    <button
+                        onClick={() => setIsSymptomModalOpen(true)}
+                        className="p-4 bg-gradient-to-r from-blue-500 to-cyan-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-cyan-700 transition-all shadow-md"
+                    >
                         Track Symptoms
                     </button>
                     <button className="p-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-medium hover:from-green-600 hover:to-emerald-700 transition-all shadow-md">
@@ -51,9 +57,16 @@ export const QuickActions = ({ state, handleCycleStartDateChange }: { state: Sta
 
             {isCalendarOpen && (
                 <Calendar
-                    selectedDate={cycleStartDate ? new Date(cycleStartDate) : null}
+                    selectedDate={new Date()}
                     onDateSelect={handleDateSelect}
-                    onClose={handleCloseCalendar}
+                    onClose={() => setIsCalendarOpen(false)}
+                />
+            )}
+
+            {isSymptomModalOpen && (
+                <SymptomTrackerModal
+                    onClose={() => setIsSymptomModalOpen(false)}
+                    onSave={handleSymptomAddition}
                 />
             )}
         </>

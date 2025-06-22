@@ -10,12 +10,26 @@ export interface SetCycleLengthAction {
   payload: number; // e.g., a number as a string, like '28'
 }
 
+export interface AddSymptomAction {
+  type: ACTION_TYPES.ADD_SYMPTOM;
+  payload: Symptom;
+}
+
 // A union type that represents all possible actions in your app
 export type AppAction =
   | SetStartDateAction
-  | SetCycleLengthAction;
+  | SetCycleLengthAction
+  | AddSymptomAction;
 
 export type State = {
   cycleStartDate: number | null;
   cycleLength: number;
+  symptoms: Symptom[];
 };
+
+// Defines the structure for a symptom record.
+export interface Symptom {
+  name: string;
+  icon: string;
+  severity: 'MILD' | 'MODERATE' | 'EXTREME';
+}

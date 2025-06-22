@@ -17,6 +17,9 @@ export const appReducer = (state: State, action: AppAction): State => {
             }
             return state;
 
+        case ACTION_TYPES.ADD_SYMPTOM:
+            return { ...state, symptoms: [...state.symptoms, action.payload] };
+
         default:
             return state;
     }
