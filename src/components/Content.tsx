@@ -31,7 +31,7 @@ export const Content = () => {
             <CycleProgress state={state} />
             <HealthMetric />
             <Symptoms symptoms={state.symptoms} />
-            <QuickActions handleSaveSymptom={handleSaveSymptom} handleCycleStartDateChange={handleCycleStartDateChange} />
+            <QuickActions state={state} handleSaveSymptom={handleSaveSymptom} handleCycleStartDateChange={handleCycleStartDateChange} />
         </main>
     )
 }

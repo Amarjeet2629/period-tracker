@@ -3,16 +3,18 @@ import React, { useState } from 'react';
 import { Calendar } from './Calendar';
 import { SymptomTrackerModal } from './SymptomTrackerModal';
 
-import { Symptom } from '@/constants/types';
+import { Symptom, State } from '@/constants/types';
 
 interface QuickActionsProps {
+    state: State;
     handleCycleStartDateChange: (date: Date) => void;
     handleSaveSymptom: (symptom: Symptom) => void;
 }
 
-export const QuickActions: React.FC<QuickActionsProps> = ({ handleCycleStartDateChange, handleSaveSymptom }) => {
+export const QuickActions: React.FC<QuickActionsProps> = ({ state, handleCycleStartDateChange, handleSaveSymptom }) => {
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const [isSymptomModalOpen, setIsSymptomModalOpen] = useState(false);
+    const { cycleStartDate } = state;
 
     const handleDateSelect = (date: Date) => {
         handleCycleStartDateChange(date);
@@ -57,7 +59,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ handleCycleStartDate
 
             {isCalendarOpen && (
                 <Calendar
-                    selectedDate={new Date()}
+                    selectedDate={cycleStartDate ? new Date(cycleStartDate) : null}
                     onDateSelect={handleDateSelect}
                     onClose={() => setIsCalendarOpen(false)}
                 />

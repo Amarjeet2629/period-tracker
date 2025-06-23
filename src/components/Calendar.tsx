@@ -8,6 +8,11 @@ interface CalendarProps {
 
 export const Calendar: React.FC<CalendarProps> = ({ selectedDate, onDateSelect, onClose }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [localSelectedDate, setLocalSelectedDate] = useState<Date | null>(selectedDate);
+
+    const handleDateSelect = (date: Date) => {
+        setLocalSelectedDate(date);
+    };
 
     const getDaysInMonth = (date: Date) => {
         const year = date.getFullYear();
@@ -46,7 +51,7 @@ export const Calendar: React.FC<CalendarProps> = ({ selectedDate, onDateSelect, 
     };
 
     const isSelected = (date: Date) => {
-        return selectedDate && date.toDateString() === selectedDate.toDateString();
+        return localSelectedDate && date.toDateString() === localSelectedDate.toDateString();
     };
 
     const formatMonthYear = (date: Date) => {
@@ -118,7 +123,7 @@ export const Calendar: React.FC<CalendarProps> = ({ selectedDate, onDateSelect, 
                             <div key={index} className="aspect-square">
                                 {day ? (
                                     <button
-                                        onClick={() => onDateSelect(day)}
+                                        onClick={() => handleDateSelect(day)}
                                         disabled={isFutureDate(day)}
                                         className={`w-full h-full rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center
                       ${isFutureDate(day)
@@ -146,12 +151,12 @@ export const Calendar: React.FC<CalendarProps> = ({ selectedDate, onDateSelect, 
                         <button
                             style={{ padding: '8px' }}
                             onClick={() => {
-                                if (selectedDate) {
-                                    onDateSelect(selectedDate);
+                                if (localSelectedDate) {
+                                    onDateSelect(localSelectedDate);
                                     onClose();
                                 }
                             }}
-                            disabled={!selectedDate}
+                            disabled={!localSelectedDate}
                             className="flex-1 bg-gradient-to-r from-fuchsia-500 to-purple-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity disabled:opacity-40"
                         >
                             Save Date
